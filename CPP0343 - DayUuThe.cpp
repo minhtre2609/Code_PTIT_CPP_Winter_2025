@@ -2,34 +2,63 @@
 
 using namespace std;
 
-int main ()
-{
-	ios_base::sync_with_stdio(false);
+int main() {
+    ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     
-    int t; cin >> t;
+	int t;
+    cin >> t;
+    cin.ignore();
     while (t--) 
 	{
-        int a[1000];
-        int tval, n = 0;
-        char c;
-        while (scanf("%d%c", &tval, &c) == 2) 
+        string line;
+        getline(cin, line);
+        
+        stringstream ss(line);
+        int num;
+        int count = 0, even_count = 0, odd_count = 0;
+        
+        while (ss >> num) 
 		{
-            a[n] = tval;
-            ++n;
-            if (c == '\n') 
+            count++;
+            if (num % 2 == 0) 
 			{
-                break;
+                even_count++;
+            } 
+			else 
+			{
+                odd_count++;
             }
         }
-        int d = 0, b = 0;
-        for (int i = 0; i < n; ++i) 
+        
+        bool is_superior = false;
+        
+        if (count % 2 == 0) 
 		{
-            if (a[i] % 2 == 0)d++;
-            else b++;
+            if (even_count > odd_count) 
+			{
+                is_superior = true;
+            }
+        } 
+		else 
+		{
+            if (odd_count > even_count) 
+			{
+                is_superior = true;
+            }
         }
-        if ((d + b) % 2 == 0 && d > b || (d + b) % 2 == 1 && d < b)cout << "YES\n";
-        else cout << "NO\n";
+        
+        if (is_superior) 
+		{
+            cout << "YES" << endl;
+        } 
+		else 
+		{
+            cout << "NO" << endl;
+        }
     }
+    
+    return 0;
 }
+
